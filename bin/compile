@@ -14,7 +14,7 @@ ENV_DIR=$3
 source $BP_DIR/lib/common.sh
 source <(curl -s --retry 3 -L $BUILDPACK_STDLIB_URL)
 
-export_env $ENV_DIR "." "JAVA_OPTS|JAVA_TOOL_OPTIONS"
+export_env $ENV_DIR "." "JAVA_OPTS|JAVA_TOOL_OPTIONS|ES_JAVA_OPTS"
 
 install_jdk "${BUILD_DIR}" "${CACHE_DIR}"
 
@@ -47,7 +47,6 @@ fi
 cat <<EOF >> $PROFILE_PATH
 export PATH=/app/.heroku/vendor/elasticsearch/bin:\$PATH
 export ELASTICSEARCH_URL=localhost:9200
-export ES_JAVA_OPTS: "-Xms1g -Xmx1g"
 
 source $BUILD_DIR/.profile.d/jvmcommon.sh
 
